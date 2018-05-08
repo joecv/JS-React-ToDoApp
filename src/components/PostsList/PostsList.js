@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts } from '../../redux/actionCreators'
+import { fetchPostsAsync as fetchPosts } from '../../redux/actionCreators'
 
 class PostsList extends React.Component {
   render() {

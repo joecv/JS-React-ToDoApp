@@ -39,14 +39,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.TOGGLE_TODO:
       return {
         ...state,
-        todoList: [
-          ...state.todoList.map(
-            (item, index) =>
-              index === action.payload.index
-                ? { ...item, inprogress: !item.inprogress }
-                : item
-          ),
-        ],
+        todoList: state.todoList.map(
+          (todo, index) =>
+            index === action.payload.index
+              ? { ...todo, inprogress: !todo.inprogress }
+              : todo
+        ),
       }
     default:
       return state

@@ -1,6 +1,14 @@
+import axios from 'axios'
 import actionTypes from './actionTypes'
 
-const { DELETE_TODO, INSERT_TODO, FETCH_POSTS, TOGGLE_TODO } = actionTypes
+const {
+  DELETE_TODO,
+  INSERT_TODO,
+  FETCH_POSTS,
+  FETCH_POSTS_FAILURE,
+  FETCH_POSTS_SUCCESS,
+  TOGGLE_TODO,
+} = actionTypes
 
 export const deleteTodo = index => ({
   type: DELETE_TODO,
@@ -17,6 +25,35 @@ export const toggleTodo = index => ({
   payload: { index },
 })
 
+const timeout = msec =>
+  new Promise(resolve => {
+    window.setTimeout(() => resolve(), msec)
+  })
+
+export const fetchPostsAsync = () => dispatch => {
+  dispatch(fetchPosts())
+
+  Promise.all([
+    axios.get('https://jsonplaceholder.typicode.com/posts', {
+      headers: { 'X-Garglkarg-With': 'XMLHttpRequest' },
+    }),
+    timeout(2000),
+  ])
+    .then(([response]) => dispatch(fetchPostsSuccess(response.data)))
+    .catch(error => dispatch(fetchPostsFailure(error)))
+}
+
 export const fetchPosts = () => ({
   type: FETCH_POSTS,
+})
+
+export const fetchPostsSuccess = data => ({
+  type: FETCH_POSTS_SUCCESS,
+  payload: data,
+})
+
+export const fetchPostsFailure = error => ({
+  type: FETCH_POSTS_FAILURE,
+  payload: error,
+  error: true,
 })

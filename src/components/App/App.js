@@ -22,7 +22,7 @@ const App = () => (
         exact
         render={() => {
           console.log('render 1st')
-          return <TodoApp index={2} />
+          return <TodoApp index={0} />
         }}
       />
       <Route path="/2nd" component={PostsList} />

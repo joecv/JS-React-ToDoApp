@@ -160,7 +160,6 @@ class TodoApp extends React.Component {
   }
 
   handleToggle = index => {
-    console.log('handleToggle')
     this.props.toggleTodo(index)
     // this.setState({
     //   todoList: this.state.todoList.map(
