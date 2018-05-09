@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { deleteTodo, insertTodo, toggleTodo } from '../../redux/actionCreators'
+import {
+  deleteTodo,
+  insertTodo,
+  toggleTodo,
+  toggleAll,
+  setFilter,
+} from '../../redux/actionCreators'
 import logo from './logo.svg'
 
 const StyledListItem = styled.li`
@@ -117,24 +123,12 @@ class TodoApp extends React.Component {
   }
 
   setFilter = filter => {
-    console.log('setFilter')
+    this.props.setFilter(filter)
     // this.setState({ filter: filter })
   }
 
   handleToggleAll = () => {
-    console.log('handleToggleAll')
-    // // if atleast one item is active, we set all to done, else we set all
-
-    // const itemsInProgressCount = this.state.todoList.filter(
-    //   item => item.inprogress === true
-    // ).length
-
-    // this.setState({
-    //   todoList: this.state.todoList.map(item => ({
-    //     ...item,
-    //     inprogress: itemsInProgressCount !== this.state.todoList.length,
-    //   })),
-    // })
+    this.props.toggleAll()
   }
 
   handleTodoRemoval = index => {
@@ -161,12 +155,6 @@ class TodoApp extends React.Component {
 
   handleToggle = index => {
     this.props.toggleTodo(index)
-    // this.setState({
-    //   todoList: this.state.todoList.map(
-    //     (item, idx) =>
-    //       idx === index ? { ...item, inprogress: !item.inprogress } : item
-    //   ),
-    // })
   }
 
   render() {
@@ -249,6 +237,8 @@ const mapDispatchToProps = dispatch => {
     deleteTodo: index => dispatch(deleteTodo(index)),
     insertTodo: todo => dispatch(insertTodo(todo)),
     toggleTodo: index => dispatch(toggleTodo(index)),
+    toggleAll: () => dispatch(toggleAll()),
+    setFilter: filter => dispatch(setFilter(filter)),
   }
 }
 
