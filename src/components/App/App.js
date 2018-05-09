@@ -17,14 +17,15 @@ const App = () => (
       </ul>
     </nav>
     <Switch>
-      <Route
+      {/* <Route
         path="/"
         exact
         render={() => {
           console.log('render 1st')
           return <TodoApp index={0} />
         }}
-      />
+      />  */}
+      <Route path="/" exact component={TodoApp} />
       <Route path="/2nd" component={PostsList} />
     </Switch>
   </React.Fragment>

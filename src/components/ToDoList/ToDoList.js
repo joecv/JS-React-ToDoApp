@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { PureComponent } from 'react'
+import ToDoItem from '../ToDoItem'
 
-class ToDoList extends React.PureComponent {
+class ToDoList extends PureComponent {
   render() {
+    console.log(this.props)
     return (
       <ul>
         {this.props.todos.map((todoItem, index) => {
           return (
             <div key={index} className="container-content">
-              <ToDoItem
-                item={todoItem}
-                handleToggle={() => this.props.handleToggle(index)}
-                onRemove={() => this.props.onRemove(index)}
-              />
+              <ToDoItem item={todoItem} index={index} />
             </div>
           )
         })}
@@ -20,3 +17,5 @@ class ToDoList extends React.PureComponent {
     )
   }
 }
+
+export default ToDoList
