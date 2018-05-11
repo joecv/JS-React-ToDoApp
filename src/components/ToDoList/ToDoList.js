@@ -3,17 +3,19 @@ import ToDoItem from '../ToDoItem'
 
 class ToDoList extends PureComponent {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
-      <ul>
-        {this.props.todos.map((todoItem, index) => {
-          return (
-            <div key={index} className="container-content">
-              <ToDoItem item={todoItem} index={index} />
-            </div>
-          )
-        })}
-      </ul>
+      <div className="container-col">
+        <ul>
+          {this.props.todos.map((todoItem, index) => {
+            return (
+              <div key={index} className="container-content">
+                <ToDoItem item={todoItem} index={index} />
+              </div>
+            )
+          })}
+        </ul>
+      </div>
     )
   }
 }

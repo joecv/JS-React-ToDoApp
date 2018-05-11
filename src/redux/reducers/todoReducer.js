@@ -46,16 +46,19 @@ const reducer = (state = initialState, action) => {
               : todo
         ),
       }
-    case actionTypes.TOGGLE_ALL:
+    case actionTypes.TOGGLE_ALL: {
+      const allItemsDone =
+        state.todoList.filter(item => item.inprogress === false).length ===
+        state.todoList.length
+
       return {
         ...state,
         todoList: state.todoList.map(item => ({
           ...item,
-          inprogress:
-            state.todoList.filter(item => item.inprogress === true).length !==
-            state.todoList.length,
+          inprogress: allItemsDone,
         })),
       }
+    }
     case actionTypes.SET_FILTER:
       return {
         ...state,
