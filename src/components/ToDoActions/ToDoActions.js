@@ -15,13 +15,13 @@ const StyledAnchor = styled.a`
 `
 const StyledFilterAllButton = StyledAnchor.extend`
   margin: 0px 5px;
-  color: #919191;
+  color: #41c7df;
   /* font-weight: ${props =>
     props.currentFilter === 'all' ? 'bold' : 'normal'}; */
   text-decoration-line: ${props =>
     props.currentFilter === 'all' ? 'underline' : 'none'};
   &:hover {
-    color: #919191;
+    color: #41c7df;
   }
 `
 
