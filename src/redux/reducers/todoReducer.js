@@ -46,6 +46,24 @@ const reducer = (state = initialState, action) => {
               : todo
         ),
       }
+    case actionTypes.TOGGLE_ALL: {
+      const allItemsDone =
+        state.todoList.filter(item => item.inprogress === false).length ===
+        state.todoList.length
+
+      return {
+        ...state,
+        todoList: state.todoList.map(item => ({
+          ...item,
+          inprogress: allItemsDone,
+        })),
+      }
+    }
+    case actionTypes.SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload.filter,
+      }
     default:
       return state
   }

@@ -8,6 +8,8 @@ const {
   FETCH_POSTS_FAILURE,
   FETCH_POSTS_SUCCESS,
   TOGGLE_TODO,
+  TOGGLE_ALL,
+  SET_FILTER,
 } = actionTypes
 
 export const deleteTodo = index => ({
@@ -23,6 +25,16 @@ export const insertTodo = todo => ({
 export const toggleTodo = index => ({
   type: TOGGLE_TODO,
   payload: { index },
+})
+
+export const toggleAll = index => ({
+  type: TOGGLE_ALL,
+  payload: {},
+})
+
+export const setFilter = filter => ({
+  type: SET_FILTER,
+  payload: { filter },
 })
 
 const timeout = msec =>

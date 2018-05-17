@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
-import TodoApp from '../TodoApp'
+import ToDoApp from '../ToDoApp'
 import PostsList from '../PostsList'
 import './App.css'
 
@@ -17,14 +17,15 @@ const App = () => (
       </ul>
     </nav>
     <Switch>
-      <Route
+      {/* <Route
         path="/"
         exact
         render={() => {
           console.log('render 1st')
-          return <TodoApp index={0} />
+          return <ToDoApp index={0} />
         }}
-      />
+      />  */}
+      <Route path="/" exact component={ToDoApp} />
       <Route path="/2nd" component={PostsList} />
     </Switch>
   </React.Fragment>
