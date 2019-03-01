@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { deleteTodo, toggleTodo } from '../../redux/actionCreators'
+import { deleteTodo, toggleTodo, updateTodo } from '../../redux/actionCreators'
 
 const StyledListItem = styled.li`
   height: 60px;
@@ -28,6 +28,11 @@ const StyledToDoContent = styled.div`
   padding: 5px 10px;
   width: 100%;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;  
+  &:contenteditable {
+    background-color:#bada55
+  }
 `
 
 const StyledButton = styled.button`
@@ -41,10 +46,12 @@ const StyledButton = styled.button`
   background-color: #2a2a2a;
   border: 1px solid #999;
   outline: 0;
+  margin: 7px 5px;
   cursor: pointer;
 `
-
+ 
 const StyledToggleButton = StyledButton.extend`
+border-color: ${props => (props.inProgress ? '#fff' : '#01994d')};
   color: ${props => (props.inProgress ? '#fff' : '#01994d')};
   &:hover {
     color: ${props => (props.inProgress ? '#01994d' : '#fff')};
@@ -80,8 +87,26 @@ class ToDoItem extends Component {
     }
   }
 
+  handleTodoUpdate = (event) => {
+    if (event.nativeEvent.keyCode === 13) {
+      event.preventDefault();
+      const newToDo = {
+        id: this.props.item.id,
+        title: event.target.innerHTML,
+        inprogress: this.props.item.inprogress,
+      }
+      this.props.updateTodo(newToDo)     
+    }
+  }
+  
+  handleToDoClick = (e) =>{
+    if (this.props.item.inprogress)
+    {
+      e.target.contentEditable = true;
+    }
+  }
+
   render() {
-    // console.log(this.props)
     return (
       <StyledListItem inProgress={this.props.item.inprogress}>
         <StyledToggleButton
@@ -90,7 +115,7 @@ class ToDoItem extends Component {
         >
           &#10004;
         </StyledToggleButton>
-        <StyledToDoContent>{this.props.item.title}</StyledToDoContent>
+        <StyledToDoContent onClick={this.handleToDoClick} onKeyDown={this.handleTodoUpdate} onKeyUp={this.handleOnKeyUp}>{this.props.item.title}</StyledToDoContent>
         <StyledRemoveButton onClick={this.handleRemoveToDo}>
           &#10006;
         </StyledRemoveButton>
@@ -107,6 +132,7 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteTodo: index => dispatch(deleteTodo(index)),
     toggleTodo: index => dispatch(toggleTodo(index)),
+    updateTodo: todo => dispatch(updateTodo(todo)),
   }
 }
 

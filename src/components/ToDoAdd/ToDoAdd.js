@@ -34,7 +34,6 @@ class ToDoAdd extends Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
       <div className="container-col">
         <StyledToDoText

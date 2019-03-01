@@ -2,6 +2,7 @@ import axios from 'axios'
 import actionTypes from './actionTypes'
 
 const {
+  UPDATE_TODO,
   DELETE_TODO,
   INSERT_TODO,
   FETCH_POSTS,
@@ -12,19 +13,31 @@ const {
   SET_FILTER,
 } = actionTypes
 
+export const updateTodo = todo => ({
+  type: UPDATE_TODO,
+  payload: {
+    todo
+  },
+})
 export const deleteTodo = index => ({
   type: DELETE_TODO,
-  payload: { index },
+  payload: {
+    index
+  },
 })
 
 export const insertTodo = todo => ({
   type: INSERT_TODO,
-  payload: { todo },
+  payload: {
+    todo
+  },
 })
 
 export const toggleTodo = index => ({
   type: TOGGLE_TODO,
-  payload: { index },
+  payload: {
+    index
+  },
 })
 
 export const toggleAll = index => ({
@@ -34,7 +47,9 @@ export const toggleAll = index => ({
 
 export const setFilter = filter => ({
   type: SET_FILTER,
-  payload: { filter },
+  payload: {
+    filter
+  },
 })
 
 const timeout = msec =>
@@ -46,11 +61,13 @@ export const fetchPostsAsync = () => dispatch => {
   dispatch(fetchPosts())
 
   Promise.all([
-    axios.get('https://jsonplaceholder.typicode.com/posts', {
-      headers: { 'X-Garglkarg-With': 'XMLHttpRequest' },
-    }),
-    timeout(2000),
-  ])
+      axios.get('https://jsonplaceholder.typicode.com/posts', {
+        headers: {
+          'X-Garglkarg-With': 'XMLHttpRequest'
+        },
+      }),
+      timeout(2000),
+    ])
     .then(([response]) => dispatch(fetchPostsSuccess(response.data)))
     .catch(error => dispatch(fetchPostsFailure(error)))
 }

@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+// import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import ToDoApp from '../ToDoApp'
-import PostsList from '../PostsList'
+// import PostsList from '../PostsList'
 import './App.css'
 
 const App = () => (
   <React.Fragment>
-    <nav>
+    {/* <nav>
       <ul>
         <li>
           <Link to="/">1st</Link>
@@ -15,7 +16,7 @@ const App = () => (
           <Link to="/2nd">2nd</Link>
         </li>
       </ul>
-    </nav>
+    </nav> */}
     <Switch>
       {/* <Route
         path="/"
@@ -26,7 +27,7 @@ const App = () => (
         }}
       />  */}
       <Route path="/" exact component={ToDoApp} />
-      <Route path="/2nd" component={PostsList} />
+      {/* <Route path="/2nd" component={PostsList} /> */}
     </Switch>
   </React.Fragment>
 )

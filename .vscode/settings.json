@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "prettier.useTabs": false,
   "prettier.printWidth": 80,
   "prettier.tabWidth": 2,
